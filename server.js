@@ -13,6 +13,9 @@ app.use(express.json());
 // --- ІМПОРТ МАРШРУТІВ ---
 const authRoutes = require("./routes/authRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
+const userRoutes = require("./routes/userRoutes");
+
+app.use("/api/users", userRoutes);
 
 // --- ПІДКЛЮЧЕННЯ МАРШРУТІВ ---
 app.use("/api/auth", authRoutes);
@@ -27,3 +30,18 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+/** Рекомендована послідовність тестування
+
+Register business
+
+Register client
+
+Login (client) → зберегти token
+
+Get businesses
+
+Create appointment
+
+Login business
+
+Confirm appointment */
