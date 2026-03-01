@@ -5,11 +5,18 @@ const connectDB = require("./config/db");
 
 const app = express();
 
-// 🔥 ОБОВʼЯЗКОВО має бути це
 connectDB();
 
 app.use(cors());
 app.use(express.json());
+
+// --- ІМПОРТ МАРШРУТІВ ---
+const authRoutes = require("./routes/authRoutes");
+const appointmentRoutes = require("./routes/appointmentRoutes");
+
+// --- ПІДКЛЮЧЕННЯ МАРШРУТІВ ---
+app.use("/api/auth", authRoutes);
+app.use("/api/appointments", appointmentRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "API is working 🚀" });
